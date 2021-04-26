@@ -2,6 +2,11 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card';
 import './Login.css';
+import { useAuth0 } from '@auth0/auth0-react'
+import { LoginButton } from 'react-bootstrap';
+import { LogoutButton } from 'react-bootstrap';
+
+// import { Auth0Provider } from '@auth0/auth0-react'
 
 class Login extends React.Component {
   render() {
@@ -12,7 +17,8 @@ class Login extends React.Component {
           <Card.Text>
             Click Below to Log In
           </Card.Text>
-          {/* TODO: add a `LoginButton` component here that will log the user in with Auth0 */}
+            <LoginButton variant="primary">Login</LoginButton>
+            <LogoutButton variant="primary">Login</LogoutButton>
         </Card.Body>
       </Card>
     )
