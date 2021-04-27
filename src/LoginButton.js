@@ -8,6 +8,7 @@ function LoginButton() {
   } = useAuth0();
 
   return (
+    //   Add in a Form
     <Button onClick={loginWithPopup}>Log in</Button>
   );
 }
