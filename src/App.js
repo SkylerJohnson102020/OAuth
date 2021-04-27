@@ -25,13 +25,12 @@ class App extends React.Component {
             {!this.props.auth0.isAuthenticated && <LoginButton />}
             <LogoutButton />
             <Switch>
-              <Route exact path="/" />
-
-                {/* TODO: if the user is logged in, render the `MyFavoriteBooks` component, if they are not, render the `Login` component */}
-                {this.props.auth0.isAuthenticated ? <MyFavoriteBooks /> : <LoginButton />}
-              <Route exact path="/profile" />
-              {/* TODO: add a route with a path of '/profile' that renders a `Profile` component */}
-              <Profile />
+              <Route exact path="/">
+                {this.props.auth0.isAuthenticated && <MyFavoriteBooks />}
+              </Route>
+              <Route exact path="/profile" 
+              component={Profile}>
+              </Route>
             </Switch>
             <Footer />
           </IsLoadingAndError>
