@@ -14,24 +14,35 @@ class BestBooks extends React.Component {
 
     componentDidMount = async (e) => {
         // e.preventDefault();
-        const SERVER = 'localhost:27017';
+        console.log('bookComponentDidMount');
+        const SERVER = 'http://localhost:3001';
         try {
-            const books = await axios.get(`${SERVER}/books`, {params: { email: this.props.auth0.user.email }});
+            const books = await axios.get(`${SERVER}/books`);
             console.log(books.data); 
             this.setState({ books: books.data })
         } catch(error){
             console.log(error);
         }
     }
-
+    
     // updateName = (name) => this.setState({ name });
-
+    
     render() {
+        console.log(this.state);
         return(
-            <Carousel>
-                {/* {this.props.} */}
-
+            this.state.books.length > 0 ? 
+            <Carousel>    
+                {this.state.books.map((book, index) =>
+                <Carousel.Item key={index}>
+                    <Carousel.Caption>
+                        <h3>{book.name}</h3>
+                        <p>{book.description}</p>
+                        <p>{book.status}</p>
+                    </Carousel.Caption>
+                </Carousel.Item> 
+            )}   
             </Carousel>
+            : ''
         )
     }
 }
