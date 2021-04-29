@@ -8,7 +8,8 @@ class BestBooks extends React.Component {
         super(props);
         this.state = {
             books: [],
-            name: ''
+            name: '',
+            newBook: []
         }
     }
 
@@ -25,7 +26,9 @@ class BestBooks extends React.Component {
         }
     }
     
-    // updateName = (name) => this.setState({ name });
+    getNewBooks = async (e) => {
+        
+    }
     
     render() {
         console.log(this.state);
