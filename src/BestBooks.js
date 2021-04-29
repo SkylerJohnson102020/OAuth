@@ -9,14 +9,16 @@ class BestBooks extends React.Component {
         this.state = {
             books: [],
             name: '',
-            newBook: []
+            description: '',
+            status: ''
         }
     }
-
+    
     componentDidMount = async (e) => {
         // e.preventDefault();
-        console.log('bookComponentDidMount');
         const SERVER = 'http://localhost:3001';
+        console.log('bookComponentDidMount');
+        
         try {
             const books = await axios.get(`${SERVER}/books`);
             console.log(books.data); 
@@ -26,8 +28,17 @@ class BestBooks extends React.Component {
         }
     }
     
-    getNewBooks = async (e) => {
-        
+    createNewBooks = async (e) => { 
+        // e.preventDefault();
+        const SERVER = 'http://localhost:3001';
+        try {
+            const generateBook = await axios.post(`${SERVER}/books`, {name: this.state.name, description: this.state.description, status: this.state.status });
+            const newBooksArray = generateBook.data;
+            this.setState({ generateBook: newBooksArray});    
+        } catch(error){
+            console.log(error);
+
+        }
     }
     
     render() {
