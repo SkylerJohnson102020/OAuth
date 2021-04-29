@@ -21,8 +21,8 @@ class BestBooks extends React.Component {
         
         try {
             const books = await axios.get(`${SERVER}/books`);
-            console.log(books.data); 
-            this.setState({ books: books.data })
+            console.log("componentDidMount", books.data); 
+            this.setState({ books: books.data.books })
         } catch(error){
             console.log(error);
         }
@@ -40,23 +40,23 @@ class BestBooks extends React.Component {
 
         }
     }
-    
+
     render() {
-        console.log(this.state);
+        console.log(this.state.books);
         return(
-            this.state.books.length > 0 ? 
-            <Carousel>    
+            this.state.books.length > 0 &&
+            <Carousel>
                 {this.state.books.map((book, index) =>
                 <Carousel.Item key={index}>
-                    <Carousel.Caption>
-                        <h3>{book.name}</h3>
-                        <p>{book.description}</p>
-                        <p>{book.status}</p>
-                    </Carousel.Caption>
-                </Carousel.Item> 
-            )}   
-            </Carousel>
-            : ''
+                        <img src={"/ArnoldPlaceholder.jpeg"} alt="placeholder"/>
+                     <Carousel.Caption>
+                         <h3>{book.name}</h3>
+                         <p>{book.description}</p>
+                         <p>{book.status}</p>
+                     </Carousel.Caption>
+                 </Carousel.Item>
+                 )}
+             </Carousel>
         )
     }
 }
