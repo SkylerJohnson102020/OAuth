@@ -8,9 +8,6 @@ class BestBooks extends React.Component {
         super(props);
         this.state = {
             books: [],
-            name: '',
-            description: '',
-            status: ''
         }
     }
     
@@ -22,7 +19,7 @@ class BestBooks extends React.Component {
         try {
             const books = await axios.get(`${SERVER}/books`);
             console.log("componentDidMount", books.data); 
-            this.setState({ books: books.data.books })
+            this.setState({ books: books.data })
         } catch(error){
             console.log(error);
         }
@@ -32,9 +29,9 @@ class BestBooks extends React.Component {
         // e.preventDefault();
         const SERVER = 'http://localhost:3001';
         try {
-            const generateBook = await axios.post(`${SERVER}/books`, {name: this.state.name, description: this.state.description, status: this.state.status });
-            const newBooksArray = generateBook.data;
-            this.setState({ generateBook: newBooksArray});    
+            await axios.post(`${SERVER}/books`, {name: this.state.name, description: this.state.description });
+            // const newBooksArray = generateBook.data;
+            // this.setState({ generateBook: newBooksArray});    
         } catch(error){
             console.log(error);
 
@@ -44,19 +41,22 @@ class BestBooks extends React.Component {
     render() {
         console.log(this.state.books);
         return(
-            this.state.books.length > 0 &&
-            <Carousel>
-                {this.state.books.map((book, index) =>
-                <Carousel.Item key={index}>
-                        <img src={"/ArnoldPlaceholder.jpeg"} alt="placeholder"/>
-                     <Carousel.Caption>
-                         <h3>{book.name}</h3>
-                         <p>{book.description}</p>
-                         <p>{book.status}</p>
-                     </Carousel.Caption>
-                 </Carousel.Item>
-                 )}
-             </Carousel>
+            <>
+                {this.state.books.length > 0 &&
+                <Carousel>
+                    {this.state.books.map((book, index) =>
+                    <Carousel.Item key={index}>
+                            <img src={"/ArnoldPlaceholder.jpeg"} alt="placeholder"/>
+                        <Carousel.Caption>
+                            <h3>{book.name}</h3>
+                            <p>{book.description}</p>
+                            <p>{book.status}</p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                    )}
+                </Carousel>
+                }
+             </>
         )
     }
 }

@@ -6,10 +6,9 @@ class AddBook extends React.Component {
   
   render() {
     return (
-      <Button onClick={this.props.displayModal}>Add Book</Button>
+      <Button variant="success" onClick={this.props.open}>Add Book</Button>
       )
     }
-  
 }
 
 export default withAuth0(AddBook);
