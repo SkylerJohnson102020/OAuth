@@ -9,7 +9,7 @@ function LoginButton() {
 
   return (
     //   Add in a Form
-    <Button onClick={loginWithPopup}>Log in</Button>
+    <Button variant="primary" onClick={loginWithPopup}>Log in</Button>
   );
 }
 
